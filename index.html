@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kolbo – AI study buddy for CU students</title>
+<meta name="description" content="Attendance, bunk calculator, timetable, reminders and an AI you can talk to. Free Android app for CU students.">
+<meta property="og:title" content="Kolbo – AI study buddy for CU students">
+<meta property="og:description" content="Attendance, bunk calculator, timetable, reminders and an AI you can talk to. Free for Android.">
+<meta property="og:image" content="https://lakshyaprivatelibrary-sudo.github.io/kolbo-releases/img/og.jpg">
+<meta property="og:url" content="https://lakshyaprivatelibrary-sudo.github.io/kolbo-releases/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#070B14">
+<link rel="icon" href="img/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#070B14; --surface:#0E1526; --surface2:#16203A; --line:#223052; --accent:#34E7E4; --accent2:#6C8BFF; --good:#34D399; --warn:#FFC857; --text:#EAF0FF; --dim:#8CA0C6; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:Inter,system-ui,sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:980px; margin:0 auto; padding:0 16px; }
+  a { color:var(--accent); }
+  /* hero */
+  .hero { position:relative; overflow:hidden; text-align:center; padding:56px 0 36px; }
+  .hero::before { content:""; position:absolute; inset:-40% -20% auto; height:520px; background:radial-gradient(closest-side, rgba(108,139,255,.35), transparent), radial-gradient(closest-side at 70% 60%, rgba(52,231,228,.25), transparent); filter:blur(20px); z-index:-1; }
+  .logo { width:96px; height:96px; border-radius:26px; box-shadow:0 10px 40px rgba(52,231,228,.25); }
+  h1 { font-size:clamp(36px,8vw,56px); font-weight:800; margin:14px 0 6px; letter-spacing:-1px; }
+  .tag { font-size:clamp(17px,3.6vw,21px); color:var(--dim); margin:0 auto 26px; max-width:560px; }
+  .grad { background:linear-gradient(90deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .btn { display:inline-flex; align-items:center; gap:12px; padding:16px 28px; border-radius:999px; font-weight:800; font-size:18px; text-decoration:none; color:#06121a; background:linear-gradient(90deg,var(--accent),var(--accent2)); box-shadow:0 8px 30px rgba(52,231,228,.35); transition:transform .15s; }
+  .btn:hover { transform:translateY(-2px); }
+  .btn svg { width:24px; height:24px; }
+  .meta { margin-top:12px; color:var(--dim); font-size:14px; }
+  .badges { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:18px; }
+  .badge { font-size:13px; padding:6px 12px; border-radius:999px; background:var(--surface); border:1px solid var(--line); color:var(--dim); }
+  .badge b { color:var(--good); }
+  /* screenshots */
+  .shots { display:flex; gap:18px; padding:24px 0 8px; overflow-x:auto; scroll-snap-type:x mandatory; }
+  .shots img { width:220px; flex:none; border-radius:26px; border:1px solid var(--line); box-shadow:0 20px 50px rgba(0,0,0,.5); scroll-snap-align:center; }
+  .shots img:nth-child(2) { transform:translateY(-14px); }
+  .shots img:first-child { margin-left:auto; } .shots img:last-child { margin-right:auto; } /* centred when it fits, scrollable from the start when it doesn't */
+  /* sections */
+  section { padding:40px 0 8px; }
+  h2 { font-size:clamp(24px,5vw,32px); font-weight:800; margin:0 0 6px; letter-spacing:-.5px; }
+  .sub { color:var(--dim); margin:0 0 20px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px; }
+  .card { background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:18px; }
+  .card h3 { margin:6px 0 4px; font-size:17px; }
+  .card p { margin:0; color:var(--dim); font-size:15px; }
+  .ico { font-size:26px; }
+  .safe .card { border-color:rgba(52,211,153,.35); }
+  ol.steps { counter-reset:s; list-style:none; padding:0; margin:0; display:grid; gap:12px; }
+  ol.steps li { counter-increment:s; position:relative; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:14px 16px 14px 60px; }
+  ol.steps li::before { content:counter(s); position:absolute; left:16px; top:14px; width:30px; height:30px; border-radius:50%; display:grid; place-items:center; font-weight:800; color:#06121a; background:linear-gradient(135deg,var(--accent),var(--accent2)); }
+  ol.steps small { color:var(--dim); display:block; }
+  table { width:100%; border-collapse:collapse; font-size:15px; }
+  td { padding:10px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  td:first-child { font-weight:600; white-space:nowrap; }
+  td:last-child { color:var(--dim); }
+  .cta { text-align:center; padding:48px 0 24px; }
+  footer { text-align:center; color:var(--dim); font-size:13px; padding:24px 16px 40px; border-top:1px solid var(--line); margin-top:32px; }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <img class="logo" src="img/icon.png" alt="Kolbo app icon">
+    <h1>Kolbo</h1>
+    <p class="tag">Your <span class="grad">AI study buddy</span> for CU. Attendance, bunks, timetable and reminders — just ask.</p>
+    <a class="btn" id="dl" href="https://github.com/lakshyaprivatelibrary-sudo/kolbo-releases/releases/latest/download/kolbo.apk">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
+      Download for Android
+    </a>
+    <div class="meta" id="meta">Free · Android 8 or newer</div>
+    <div class="badges">
+      <span class="badge"><b>✓</b> Free, no ads</span>
+      <span class="badge"><b>✓</b> Password stays on your phone</span>
+      <span class="badge"><b>✓</b> Official file from GitHub</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="shots">
+    <img src="img/attendance.webp" alt="Attendance screen: each subject's % and how many classes you can skip" loading="lazy">
+    <img src="img/schedule.webp" alt="Timetable screen with classes and breaks" loading="lazy">
+    <img src="img/reminders.webp" alt="Reminders screen" loading="lazy">
+  </div>
+
+  <section>
+    <h2>What Kolbo does</h2>
+    <p class="sub">Log in with your CUIMS once. Kolbo reads your data and keeps it on your phone.</p>
+    <div class="grid">
+      <div class="card"><div class="ico">📊</div><h3>Attendance + bunk calculator</h3><p>See every subject's %, how many classes you can skip, and how many you must attend to reach 75%.</p></div>
+      <div class="card"><div class="ico">🗓️</div><h3>Timetable with breaks</h3><p>Today's classes in order, rooms, and your free slots. A heads-up 10 minutes before each class.</p></div>
+      <div class="card"><div class="ico">⏰</div><h3>Reminders</h3><p>"Remind me to submit DSA homework Friday at 5." Done. Add or delete them yourself too.</p></div>
+      <div class="card"><div class="ico">🎙️</div><h3>Talk to it</h3><p>Ask by voice or text: "Can I skip Maths tomorrow?", "When is my next exam?" — in English or Hinglish.</p></div>
+      <div class="card"><div class="ico">📝</div><h3>Exams, marks, CGPA</h3><p>Date sheet with countdowns, your marks and results in one place.</p></div>
+      <div class="card"><div class="ico">⏱️</div><h3>Study timer + plans</h3><p>Focus timer, daily study goal, and study plans that remind you when to start.</p></div>
+    </div>
+  </section>
+
+  <section class="safe">
+    <h2>Is it safe?</h2>
+    <p class="sub">Fair question. Here is exactly what happens.</p>
+    <div class="grid">
+      <div class="card"><div class="ico">🔒</div><h3>Your password stays with you</h3><p>Your CUIMS password is saved encrypted on your phone and is only typed into the official CUIMS site (students.cuchd.in).</p></div>
+      <div class="card"><div class="ico">⚠️</div><h3>Why Android shows a warning</h3><p>Kolbo isn't on the Play Store yet, so Android warns you like it does for any app shared as a file. That warning is normal.</p></div>
+      <div class="card"><div class="ico">🤖</div><h3>How the AI answers</h3><p>When you ask Kolbo something, your question and the numbers it needs (like a subject's attendance) go to Google's Gemini AI to write the answer.</p></div>
+      <div class="card"><div class="ico">📦</div><h3>The file comes from GitHub</h3><p>The button downloads the official release straight from GitHub. New versions come through an update popup inside the app.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Install in 1 minute</h2>
+    <p class="sub">Steps can look a little different on each phone.</p>
+    <ol class="steps">
+      <li>Tap <b>Download for Android</b> above.<small>The file is about 60 MB.</small></li>
+      <li>Open <b>kolbo.apk</b> from your notifications or Downloads.</li>
+      <li>If asked, allow <b>Install unknown apps</b> for your browser, then go back.<small>This only lets your browser install this file. You can turn it off again after.</small></li>
+      <li>Tap <b>Install</b>. If Play Protect pops up, tap <b>More details → Install anyway</b>.</li>
+      <li>Open Kolbo and log in with your CUIMS ID.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Permissions, and why</h2>
+    <p class="sub">No contacts, no photos, no location.</p>
+    <div class="card">
+      <table>
+        <tr><td>Microphone</td><td>Voice mode, only while you are talking to Kolbo.</td></tr>
+        <tr><td>Notifications</td><td>Class alerts, reminders and timer alerts.</td></tr>
+        <tr><td>Alarms</td><td>So reminders and alarms ring on time.</td></tr>
+        <tr><td>Install apps</td><td>To install Kolbo updates when you tap Update.</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <div class="cta">
+    <a class="btn" href="https://github.com/lakshyaprivatelibrary-sudo/kolbo-releases/releases/latest/download/kolbo.apk">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
+      Get Kolbo
+    </a>
+  </div>
+</div>
+
+<footer>Made by Lakshya, a CU student. Not an official Chandigarh University app.<br>Screenshots show sample data.</footer>
+
+<script>
+  // Show the real version and size of the latest release; the page still works if GitHub doesn't answer.
+  fetch('https://api.github.com/repos/lakshyaprivatelibrary-sudo/kolbo-releases/releases/latest')
+    .then((r) => r.json())
+    .then((r) => {
+      const apk = (r.assets || []).find((a) => a.name === 'kolbo.apk');
+      if (!apk) return;
+      const v = String(r.tag_name || '').replace(/^v/, '').replace(/\+\d+$/, '');
+      document.getElementById('meta').textContent = `Free · Version ${v} · ${Math.round(apk.size / 1048576)} MB · Android 8 or newer`;
+    })
+    .catch(() => {});
+</script>
+</body>
+</html>
